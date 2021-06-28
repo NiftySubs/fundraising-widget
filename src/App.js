@@ -6,6 +6,7 @@ function App({ container }) {
   const name=container.getAttribute("data-name");
   const message = container.getAttribute("data-message");
   const days = container.getAttribute("data-deadline");
+  
   return (
     <Box borderColor="twitter" borderStyle="solid" borderWidth={1} boxShadow="base" margin={5} padding={5} borderRadius={5}>
       <VStack spacing={5}>
