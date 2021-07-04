@@ -41,6 +41,7 @@ function App({ container }) {
   const [currentAccount, setCurrentAccount] = useState();
   const [ isMetamaskInstalled, setIsMetamaskInstalled ] = useState(false);
   const [ isFunding, setIsFunding ] = useState(false);
+  const [ isClaiming, setIsClaiming ] = useState(false);
 
   const fundraiseId = container.getAttribute("data-fundraise-id");
   const isPayable = container.getAttribute("data-payable");
@@ -136,6 +137,21 @@ function App({ container }) {
     
   }
 
+  const claimDonation = async () => {
+    setIsClaiming(true);
+    const web4 = new Web3(window.ethereum);
+    const donateContract = new web4.eth.Contract(FundraisingContractABI, "0x608DA975Dd743Bde9ab6329258E4AD3619A533EF");
+    donateContract.methods.claimDonation(0).send({ from: currentAccount })
+    .then((receipt) => {
+      console.log(receipt);
+      setIsClaiming(false);
+    })
+    .catch((error) => {
+      console.log(error);
+      setIsClaiming(false);
+    });
+  }
+
   return (
     <Box backgroundColor="pink.500" borderColor="pink" borderStyle="solid" borderWidth={1} boxShadow="base" margin={5} padding={5} borderRadius={5}>
       <VStack spacing={5}>
@@ -179,6 +195,7 @@ function App({ container }) {
               </InputGroup>
               <Button isLoading={isFunding} onClick={donate} alignSelf="flex-end" justifySelf="center">Donate</Button>
             </HStack>
+            <Button isLoading={isClaiming} onClick={claimDonation}>Claim your Donation</Button>
             <Text>Connected as: <Tag>{currentAccount}</Tag></Text>
           </VStack>
           :
