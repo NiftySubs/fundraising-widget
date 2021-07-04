@@ -6,7 +6,7 @@ function ProgressBar({ value }) {
 
     }, [value]);
     return (
-        <Progress marginTop={2} value={value} hasStripe isAnimated borderRadius={10} />
+        <Progress colorScheme="green" marginTop={2} value={value} hasStripe isAnimated borderRadius={10} />
     );
 }
 

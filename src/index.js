@@ -4,12 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from "@chakra-ui/react";
-
+import theme from "./theme";
+import "@fontsource/inter";
 const fundraisingWidgetContainer = document.getElementById("fundraising-widget-container");
 
 ReactDOM.render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <App container={fundraisingWidgetContainer} />
     </ChakraProvider>
   </React.StrictMode>,
